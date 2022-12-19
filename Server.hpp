@@ -16,6 +16,20 @@
  * ou pas c'est egal
  * 
  * 
+ * quand est ce que ca finit:
+ * quand le serveur envoie `quit` le serveur close la socket en relation
+ * avec le user
+ * quand le serveur est arrete toute le sockt doivent etre close (leaks)
+ * 
  * */
 
 #ifndef SERVER_HPP
+#define SERVER_HPP
+
+class server
+{
+
+};
+
+#endif
+
