@@ -1,4 +1,8 @@
-
-/** dans le main l'objet serveur est creer
+/** @brief 
+ * les socket sont creer et stockee 
+ * les connexion sont 'surveillées' et enregistées
  * 
+ * @params:
+ * - port number
+ *  
  * */
