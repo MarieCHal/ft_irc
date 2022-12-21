@@ -1,12 +1,10 @@
 #include "data.hpp"
 
 void    nick (t_data *data, int i, std::string cmd) {
-    std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
-    printf("\nNIIIIICK\n");
+    cmd_nick(data, i, cmd);
 }
 void    user (t_data *data, int i, std::string cmd) {
-    std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
-    printf("\nUUUUUUUUSER\n");
+    cmd_user(data, i, cmd);
 }
 void    join (t_data *data, int i, std::string cmd) {
     std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;

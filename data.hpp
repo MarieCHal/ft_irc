@@ -46,4 +46,9 @@ void    user (t_data *data, int i, std::string cmd);
 void    join (t_data *data, int i, std::string cmd);
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd);
 
+
+//commande de jeremie
+int cmd_nick(t_data *data, int i, std::string cmd);
+int cmd_user(t_data *data, int i, std::string cmd);
+
 #endif
