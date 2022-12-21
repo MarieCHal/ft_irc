@@ -2,10 +2,18 @@
 // 9 caratere maximum
 int cmd_nick(t_data *data, int i, std::string cmd)
 {
+    int k = 0;
+    for (size_t j = 0; j < cmd.length(); j++)
+    {
+        if (cmd[j] == ' ')
+            k++;
+    }
+    if (k != 1)
+        return (1);
     size_t pos = cmd.find_first_of(' ', 0);
     cmd.erase(0, pos + 1);
     if (cmd.find(' '))
-        return(1);
+        return;
     int j = 0;
     while (j < data->max_client)
     {
