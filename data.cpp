@@ -11,6 +11,7 @@ void    user (t_data *data, int i, std::string cmd) {
 void    join (t_data *data, int i, std::string cmd) {
     std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
     printf("\nJOIIIIIIIIiN\n");
+    parse_join(data, i, cmd);
 }
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
 {

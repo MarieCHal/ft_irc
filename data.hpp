@@ -46,4 +46,8 @@ void    user (t_data *data, int i, std::string cmd);
 void    join (t_data *data, int i, std::string cmd);
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd);
 
+//Marie
+//JOIN 
+int parse_join(t_data *data, int i, std::string cmd);
+
 #endif
