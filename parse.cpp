@@ -56,6 +56,7 @@ int first_parsing(t_data *data, int i)
         char copy_cmd[pos];
         to_parse.copy(copy_cmd, pos, 0);
         std::cout << "from client socket fd: " << data->client[i].sd << std::endl;
+        
         //send copy_cmd to see if it is a command or message
         interpretor(data, i, copy_cmd);
         to_parse.erase(0, pos + 1);

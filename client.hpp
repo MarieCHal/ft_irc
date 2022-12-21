@@ -30,7 +30,7 @@ class client
     
     client () {}
     client(int socketfd) : sd(socketfd) {}
-    ~ client() {}
+    ~client() {}
 };
 
 #endif

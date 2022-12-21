@@ -12,7 +12,8 @@ OBJS_DIR = ./objs
 SRCS =	servertest.cpp \
 		init_client.cpp \
 		parse.cpp \
-		exec.cpp
+		exec.cpp \
+		fonction_utils.cpp
 			
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
