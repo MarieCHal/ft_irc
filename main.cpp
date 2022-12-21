@@ -5,12 +5,11 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <iostream>
-#include <cstdio>
+#include <stdlib.h>
+#include <string.h>
 #include <arpa/inet.h>
 
 #include "data.hpp"
-#include "fonction_utils.hpp"
 
 int print_client(t_data *data)
 {
@@ -109,10 +108,14 @@ int main(int ac, char **av)
                 else
                 {
                     //envoyer le message au parser a analyser
+                    ft_bzero(data.output, strlen(data.output));
                     data.input[n] = '\0';
                     first_parsing(&data, i);
-                    printf("This is the message from %d: %s\n", sd, data.input);
-                    send(sd , data.input, strlen(data.input) , 0);
+                    //printf("This is the message from %d: %s\n", sd, data.input);
+                    //send(sd , data.output, strlen(data.output) , 0);
+                    send_msg(&data, i);
+                    ft_bzero(data.input, strlen(data.input));
+                    //ft_bzero(data.output, strlen(data.output));
                 }
             }
         }
