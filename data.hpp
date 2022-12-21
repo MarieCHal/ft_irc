@@ -22,6 +22,7 @@
 #include <map>
 #include <vector>
 #include "client.hpp"
+#include "fonction_utils.hpp"
 
 
 typedef struct s_data
@@ -35,9 +36,14 @@ typedef struct s_data
 
 }       t_data;
 
-/*void    cmd(std::string cmd)
-typedef void()*/
+typedef void(*funtab) (t_data *data, int i, std::string cmd);
 
 int create_new_client(int socketfd, t_data *data);
 int first_parsing(t_data *data, int i);
+
+void    nick (t_data *data, int i, std::string cmd);
+void    user (t_data *data, int i, std::string cmd);
+void    join (t_data *data, int i, std::string cmd);
+void check_cmd(t_data *data, int i, std::string key_word, std::string cmd);
+
 #endif

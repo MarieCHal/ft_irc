@@ -9,10 +9,10 @@ AR = ar -rc
 SRCS_DIR = ./src
 OBJS_DIR = ./objs
 
-SRCS =	servertest.cpp \
+SRCS =	main.cpp \
 		init_client.cpp \
 		parse.cpp \
-		exec.cpp \
+		data.cpp \
 		fonction_utils.cpp
 			
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))

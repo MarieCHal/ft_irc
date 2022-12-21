@@ -22,25 +22,25 @@
  * */
 
 #include "data.hpp"
-#include "exec.hpp"
+//#include "exec.hpp"
 #include <iostream>
 
+/** if BUG:
+ * penser au resultat de copy et au char * (dest)
+ * */
 
-int interpretor(t_data *data, int i, char * copy_cmd)
+
+int interpretor(t_data *data, int i, char * cmd)
 {
-    size_t pos;
-    std::string parsed = copy_cmd;
-    pos = parsed.find_first_of(32, 0);
-    char cmd[pos];
-    parsed.copy(cmd, pos, 0);
-    std::string newCmd = cmd;
-    /*for(size_t i = 0; cmd[i]; i++)
-    {
-        newCmd[i] = toupper(cmd[i]);
-    }*/
-    std::cout << "new cmd: " << newCmd << std::endl;
-    exec_input exec(parsed);
-    exec.check_cmd(data, i, newCmd);
+    std::string parsed = cmd;
+    size_t pos = parsed.find_first_of(32, 0);
+
+    char key_word[pos + 1];
+    parsed.copy(key_word, pos, 0);
+    key_word[pos] = '\0';
+    std::string new_key = key_word;
+    new_key = toUpper(new_key);
+    check_cmd(data, i, new_key, parsed);
     return (0);
 }
 
@@ -53,11 +53,9 @@ int first_parsing(t_data *data, int i)
     while (to_parse.length() != 0)
     {
         pos = to_parse.find_first_of('\n', 0);
-        char copy_cmd[pos];
+        char copy_cmd[pos + 1];
         to_parse.copy(copy_cmd, pos, 0);
-        std::cout << "from client socket fd: " << data->client[i].sd << std::endl;
-        
-        //send copy_cmd to see if it is a command or message
+        copy_cmd[pos] = '\0';
         interpretor(data, i, copy_cmd);
         to_parse.erase(0, pos + 1);
         bzero(copy_cmd, pos);

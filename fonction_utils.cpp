@@ -14,3 +14,9 @@ void ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+
+std::string toUpper(std::string s)
+{
+    std::transform(s.begin(), s.end(), s.begin(), ::toupper);
+    return s;
+}
