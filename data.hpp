@@ -46,4 +46,11 @@ void    user (t_data *data, int i, std::string cmd);
 void    join (t_data *data, int i, std::string cmd);
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd);
 
+
+
+
+
+
+//gael
+void    message (t_data *data, int i, std::string cmd);
 #endif
