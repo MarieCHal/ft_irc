@@ -34,14 +34,15 @@ int interpretor(t_data *data, int i, char * cmd)
 {
     std::string parsed = cmd;
     size_t pos = parsed.find_first_of(32, 0);
-
     char key_word[pos + 1];
-    std::cout << "key_word in interpretor = " << key_word << std::endl;
+
+    ft_bzero(key_word, strlen(key_word));
     parsed.copy(key_word, pos, 0);
-    key_word[pos] = '\0';
-    std::string new_key = key_word;
+    std::cout << "key_word in interpretor = " << key_word << std::endl;
+    std::string new_key(key_word);
     new_key = toUpper(new_key);
     check_cmd(data, i, new_key, parsed);
+    //new_key.clear();
     return (0);
 }
 
@@ -49,8 +50,8 @@ int interpretor(t_data *data, int i, char * cmd)
 int first_parsing(t_data *data, int i)
 {
     size_t pos;
-    std::string to_parse = data->input;
-
+    std::string to_parse(data->input);
+    std::cout << "input = " << data->input << std::endl;
     while (to_parse.length() != 0)
     {
         pos = to_parse.find_first_of('\n', 0);

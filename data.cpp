@@ -7,8 +7,8 @@ void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
     std::string possible_cmd [] = {"NICK", "USER", "JOIN"};
     funtab function[] = {&nick, &user, &join};
     size_t j = 0;
-    std::cout << "keyword-length de check_cmd = " << key_word.length() << std::endl;
-    std::cout << "key_word in check_cmd = " << key_word << std::endl;
+    //std::cout << "keyword-length de check_cmd = " << key_word.length() << std::endl;
+    //std::cout << "key_word in check_cmd = " << key_word << std::endl;
     while (j < possible_cmd->length())
     {
         if (key_word.compare(possible_cmd[j]) == 0)

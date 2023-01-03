@@ -23,6 +23,20 @@ std::string toUpper(std::string s)
 
 void create_output(t_data *data, std::string msg)
 {
-    for (size_t j = 0; j < msg.length(); j++)
-        data->output[j] = msg[j];
+    //for (size_t j = 0; j < msg.length(); j++)
+        //data->output[j] = msg[j];
+	ft_strcpy(data->output, msg.c_str());
+}
+
+char * ft_strcpy(char *dest, const char * src)
+{
+	char *ptr = dest;
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return ptr;
 }

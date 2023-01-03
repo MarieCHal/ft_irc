@@ -26,10 +26,11 @@
 //revoie dans le output de tout les client du canal le input du client expediteur
 void    message (t_data *data, int i, std::string cmd, std::string key_word) {
     (void)cmd;
+    //ft_bzero(data->output, strlen(data->output));
     if (data->client[i].chanel.length() == 0)
     {
         std::string msg = "421: ";
-        std::cout << "key_word in message = " << key_word << std::endl;
+        //std::cout << "key_word in message = " << key_word << std::endl;
         msg += data->client[i].nickname;
         msg += " ";
         msg += key_word;

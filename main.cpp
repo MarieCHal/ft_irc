@@ -38,7 +38,9 @@ int main(int ac, char **av)
     int max_sd;
     int sd;
     int activity;
-
+    
+    ft_bzero(data.input, strlen(data.input));
+    ft_bzero(data.output, strlen(data.output));
     //clear/init fdset
     FD_ZERO(&readfds);
     if(ac < 2)
@@ -114,8 +116,6 @@ int main(int ac, char **av)
                     //printf("This is the message from %d: %s\n", sd, data.input);
                     //send(sd , data.output, strlen(data.output) , 0);
                     send_msg(&data, i);
-                    ft_bzero(data.input, strlen(data.input));
-                    //ft_bzero(data.output, strlen(data.output));
                 }
             }
         }
