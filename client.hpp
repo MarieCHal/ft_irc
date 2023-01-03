@@ -26,7 +26,7 @@ class client
     std::string username;
     std::string password;
     bool        op;
-    std::vector<int> *chanel;
+    std::string chanel;
     
     client () {}
     client(int socketfd) : sd(socketfd) {}
