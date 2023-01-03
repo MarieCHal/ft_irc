@@ -21,6 +21,7 @@ int print_client(t_data *data)
 
 /** TODO:
  * atoi
+ * strlen
  *  */
 
 int main(int ac, char **av)
