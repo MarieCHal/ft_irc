@@ -30,18 +30,25 @@
  * */
 
 
-int interpretor(t_data *data, int i, char * cmd)
+int interpretor(t_data *data, int i, std::string cmd)
 {
-    std::string parsed = cmd;
-    size_t pos = parsed.find_first_of(32, 0);
-
-    char key_word[pos + 1];
-    std::cout << "key_word in interpretor = " << key_word << std::endl;
-    parsed.copy(key_word, pos, 0);
-    key_word[pos] = '\0';
-    std::string new_key = key_word;
-    new_key = toUpper(new_key);
-    check_cmd(data, i, new_key, parsed);
+    size_t pos;
+    std::string key_word;
+    //std::cout << "cmd-length in interpretor = " << cmd.length() << std::endl;
+    cmd.erase(cmd.length() - 2, cmd.length());
+    cmd[cmd.length()] = '\0';
+    //std::cout << "cmd in interpretor = " << cmd << std::endl;
+    //std::cout << "cmd-length in interpretor = " << cmd.length() << std::endl;
+    pos = cmd.find(' ');
+    if (pos != std::string::npos)
+        pos = cmd.find_first_of(32, 0);
+    else
+        pos = cmd.find_first_of('\0', 0);
+    //std::cout << "pos in iterpretor = " << pos << std::endl;
+    key_word.assign(cmd, 0, pos);
+    //std::cout << "key_word in interpretor = " << key_word << std::endl;
+    key_word = toUpper(key_word);
+    check_cmd(data, i, key_word, cmd);//ATTENTION C'EST ICI QUE CA MERDE, A FAIRE LE 4 01 2023
     return (0);
 }
 
@@ -49,17 +56,16 @@ int interpretor(t_data *data, int i, char * cmd)
 int first_parsing(t_data *data, int i)
 {
     size_t pos;
-    std::string to_parse = data->input;
-
+    std::string to_parse(data->input);
+    std::string cmd;
+    std::cout << "input = " << data->input << std::endl;
     while (to_parse.length() != 0)
     {
         pos = to_parse.find_first_of('\n', 0);
-        char copy_cmd[pos];
-        to_parse.copy(copy_cmd, pos, 0);
-        copy_cmd[pos - 1] = '\0';
-        interpretor(data, i, copy_cmd);
+       //std::cout << "pos in first_parsing = " << pos << std::endl;
+        cmd.assign(to_parse, 0, pos + 1);
+        interpretor(data, i, cmd);
         to_parse.erase(0, pos + 1);
-        bzero(copy_cmd, pos);
     }
     return (0);
 }

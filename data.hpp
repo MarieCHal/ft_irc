@@ -52,4 +52,5 @@ std::string toUpper(std::string s);
 void create_output(t_data *data, std::string msg);
 void    message (t_data *data, int i, std::string cmd, std::string key_word);
 void    send_msg(t_data *data, int i);
+char * ft_strcpy(char *dest, const char * src);
 #endif

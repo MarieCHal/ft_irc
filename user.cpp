@@ -13,9 +13,10 @@ void user(t_data *data, int i, std::string cmd)
     }
     if (k == 0)
     {
-        create_output(data, "USER: invalid argument\r\n");
+        create_output(data, "USER: invalid argument");
         return;
     }
     data->client[i].username = cmd;
-    create_output(data, "USER: OK\r\n");
+    create_output(data, "USER: OK");
+    std::cout << "coucou " << data->client[i].username << std::endl;
 }

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
+
 #include "data.hpp"
 
 int print_client(t_data *data)
@@ -20,6 +21,7 @@ int print_client(t_data *data)
 
 /** TODO:
  * atoi
+ * strlen
  *  */
 
 int main(int ac, char **av)
@@ -37,7 +39,9 @@ int main(int ac, char **av)
     int max_sd;
     int sd;
     int activity;
-
+    
+    ft_bzero(data.input, strlen(data.input));
+    ft_bzero(data.output, strlen(data.output));
     //clear/init fdset
     FD_ZERO(&readfds);
     if(ac < 2)
@@ -98,7 +102,7 @@ int main(int ac, char **av)
             {
                 if ((n = read (sd, data.input, 255)) == 0)
                 {
-                    std::cout << "Host disconected ";
+                    std::cout << "Host disconected " << std::endl;
                     // envoyer a tous les clients que le client c'est deco ?
                     data.client.erase(data.client.begin() + i);
                     data.max_client--;
@@ -113,8 +117,6 @@ int main(int ac, char **av)
                     //printf("This is the message from %d: %s\n", sd, data.input);
                     //send(sd , data.output, strlen(data.output) , 0);
                     send_msg(&data, i);
-                    ft_bzero(data.input, strlen(data.input));
-                    //ft_bzero(data.output, strlen(data.output));
                 }
             }
         }
