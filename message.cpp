@@ -30,18 +30,19 @@ void    message (t_data *data, int i, std::string cmd, std::string key_word) {
     if (data->client[i].chanel.length() == 0)
     {
         std::string msg = "421: ";
-        //std::cout << "key_word in message = " << key_word << std::endl;
+        std::cout << "key_word in message = " << key_word << std::endl;
+        std::cout << "nickname in message = " << data->client[i].nickname << std::endl;
         msg += data->client[i].nickname;
         msg += " ";
         msg += key_word;
-        msg += " :Unknown command\r\n";
+        msg += " :Unknown command";
         create_output(data, msg);
         return;
     }
     //parse msg
         //si private_msg -> void send_private_msg()
         //sinon void send_msg()
-    create_output(data, "Your msg\r\n");
+    create_output(data, "Your msg");
 
 }
 /*

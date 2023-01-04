@@ -102,7 +102,7 @@ int main(int ac, char **av)
             {
                 if ((n = read (sd, data.input, 255)) == 0)
                 {
-                    std::cout << "Host disconected ";
+                    std::cout << "Host disconected " << std::endl;
                     // envoyer a tous les clients que le client c'est deco ?
                     data.client.erase(data.client.begin() + i);
                     data.max_client--;
