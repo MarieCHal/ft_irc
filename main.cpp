@@ -40,6 +40,7 @@ int main(int ac, char **av)
     int sd;
     int activity;
     
+    data.server_name = "c1r2s1";
     ft_bzero(data.input, strlen(data.input));
     ft_bzero(data.output, strlen(data.output));
     //clear/init fdset
@@ -100,6 +101,7 @@ int main(int ac, char **av)
             sd = data.client[i].sd;
             if (FD_ISSET(sd, &readfds))
             {
+                /*
                 if ((n = read (sd, data.input, 255)) == 0)
                 {
                     std::cout << "Host disconected " << std::endl;
@@ -109,15 +111,16 @@ int main(int ac, char **av)
                     close(sd);
                 }
                 else
-                {
+                {*/
                     //envoyer le message au parser a analyser
+                    n = read (sd, data.input, 255);
                     ft_bzero(data.output, strlen(data.output));
                     data.input[n] = '\0';
                     first_parsing(&data, i);
                     //printf("This is the message from %d: %s\n", sd, data.input);
                     //send(sd , data.output, strlen(data.output) , 0);
-                    send_msg(&data, i);
-                }
+                    //send_all_user(&data, i);
+                //}
             }
         }
     }

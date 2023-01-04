@@ -22,10 +22,21 @@
 #include <map>
 #include <vector>
 #include "client.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <string.h>
+#include <arpa/inet.h>
 
 
 typedef struct s_data
 {
+    std::string server_name;
     std::vector<client> client; // le tableau des clients
     //std::map<std::string, std::vector<int> > chanels; // les objets 
     int     max_client;
@@ -49,8 +60,12 @@ std::string toUpper(std::string s);
 
 
 //gael
-void create_output(t_data *data, std::string msg);
+void    create_output(t_data *data, std::string msg);
 void    message (t_data *data, int i, std::string cmd, std::string key_word);
-void    send_msg(t_data *data, int i);
-char * ft_strcpy(char *dest, const char * src);
+void    send_all_user(t_data *data, int i);
+void    send_one_user(t_data *data, int i);
+char *  ft_strcpy(char *dest, const char * src);
+void    privmsg(t_data *data, int i, std::string cmd);
+void    quit(t_data *data, int i, std::string cmd);
+void list(t_data *data, int i, std::string cmd);
 #endif

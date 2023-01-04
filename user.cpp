@@ -2,6 +2,7 @@
 
 void user(t_data *data, int i, std::string cmd)
 {
+    std::string msg;
     size_t pos = cmd.find_first_of(':', 0);
     cmd.erase(0, pos + 1);
     std::cout << "cmd de user = " << cmd << std::endl;
@@ -14,9 +15,8 @@ void user(t_data *data, int i, std::string cmd)
     if (k == 0)
     {
         create_output(data, "USER: invalid argument");
+        send_one_user(data, i);
         return;
     }
     data->client[i].username = cmd;
-    create_output(data, "USER: OK");
-    std::cout << "coucou " << data->client[i].username << std::endl;
 }

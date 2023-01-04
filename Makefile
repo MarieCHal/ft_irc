@@ -18,8 +18,10 @@ SRCS =	main.cpp \
 		nick.cpp \
 		user.cpp \
 		join.cpp \
-		send.cpp
-
+		send.cpp \
+		privmsg.cpp \
+		list.cpp \
+		quit.cpp
 			
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
