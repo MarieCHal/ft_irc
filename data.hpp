@@ -40,6 +40,7 @@ typedef void(*funtab) (t_data *data, int i, std::string cmd);
 int create_new_client(int socketfd, t_data *data);
 int first_parsing(t_data *data, int i);
 
+void    quit(t_data *data, int i, std::string cmd);
 void    nick (t_data *data, int i, std::string cmd);
 void    user (t_data *data, int i, std::string cmd);
 void    join (t_data *data, int i, std::string cmd);
@@ -53,4 +54,8 @@ void create_output(t_data *data, std::string msg);
 void    message (t_data *data, int i, std::string cmd, std::string key_word);
 void    send_msg(t_data *data, int i);
 char * ft_strcpy(char *dest, const char * src);
+
+//jeremie
+void list(t_data *data, int i, std::string cmd);
+
 #endif
