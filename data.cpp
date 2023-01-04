@@ -1,26 +1,27 @@
 #include "data.hpp"
 
-void    nick (t_data *data, int i, std::string cmd) {
-    std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
-    printf("\nNIIIIICK\n");
-}
-void    user (t_data *data, int i, std::string cmd) {
-    std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
-    printf("\nUUUUUUUUSER\n");
-}
-void    join (t_data *data, int i, std::string cmd) {
-    std::cout << "cmd: " << cmd << "\ni: " << i << "\nsocket descriptor: " << data->client[i].sd << std::endl;
-    printf("\nJOIIIIIIIIiN\n");
-    parse_join(data, i, cmd);
-}
+
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
 {
-    std::string possible_cmd [] = {"NICK", "USER", "JOIN", "CAP"};
-    funtab function[] = {&nick, &user, &join, &join};
+    //std::cout << "key_word de check_cmd = " << key_word << std::endl;
+    std::string possible_cmd [] = {"NICK", "USER", "JOIN", "QUIT"};
+    funtab function[] = {&nick, &user, &join, &quit};
     size_t j = 0;
-    while (key_word.compare(possible_cmd[j]) != 0 && j < possible_cmd->length())
+    //std::cout << "cmd de check_cmd = " << cmd << std::endl;
+    //std::cout << "cmd-length de check_cmd = " << cmd.length() << std::endl;
+    //std::cout << "keyword-length de check_cmd = " << key_word.length() << std::endl;
+    //std::cout << "key_word in check_cmd = " << key_word << std::endl;
+    while (j < possible_cmd->length())
+    {
+        if (key_word.compare(possible_cmd[j]) == 0)
+        {
+            ((*function[j])(data, i, cmd));
+            return;
+        }
+        //std::cout << "possible_cmd[j] = " << possible_cmd[j] << std::endl;
         j++;
-    if (j < possible_cmd->length())
-        ((*function[j])(data, i, cmd));
-    //else appel une fonction qui parse le message
+    }
+    //std::cout << "cmd-length de check_cmd = " << possible_cmd->length() << std::endl;
+    message(data, i, cmd, key_word);
 }
+
