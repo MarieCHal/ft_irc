@@ -1,6 +1,5 @@
 #include "data.hpp"
 
-
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
 {
     //std::cout << "key_word de check_cmd = " << key_word << std::endl;
@@ -24,4 +23,3 @@ void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
     //std::cout << "cmd-length de check_cmd = " << possible_cmd->length() << std::endl;
     message(data, i, cmd, key_word);
 }
-

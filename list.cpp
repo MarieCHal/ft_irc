@@ -7,7 +7,7 @@ void list(t_data *data, int i, std::string cmd)
     for(int j = 0; j < data->max_client; j++)
     {
         if (data->client[i].chanel.empty())
-            return ;
+            j++;
         if (j > 0 && data->client[j].chanel.compare(data->client[j - 1].chanel) == 0)
             j++;
         else
@@ -16,8 +16,9 @@ void list(t_data *data, int i, std::string cmd)
             reponse += data->client[i].nickname;
             reponse += ' ';
             reponse += data->client[j].chanel;
-            reponse += " :End of /LIST\r\n";
         }   
     }
+    if (j > 1)
+        reponse += " :End of /LIST\r\n";
     create_output(data, reponse);
 }
