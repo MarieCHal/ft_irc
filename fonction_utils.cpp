@@ -82,3 +82,13 @@ size_t	ft_strlen(const char *str)
 	}
 	return (count);
 }
+
+void get_host_name(t_data *data)
+{
+	char server_name_char[1024];
+
+	gethostname(server_name_char, 1024);
+	data->server_name = server_name_char;
+	size_t pos = data->server_name.find_first_of('.', 0);
+	data->server_name.erase(pos, data->server_name.length());
+}

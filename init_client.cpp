@@ -30,15 +30,23 @@ void get_client_ip(client newClient)
     }
 }
 */
-int create_new_client(int socketfd, t_data *data)
+
+int create_new_client(int socketfd, t_data *data, sockaddr_in serv_addr)
 {
     // creer un nouveau client
     //client *newClient = new client(socketfd);
     // create dynamiquement 
     client newClient(socketfd);
     // ajoute un client au vector de dlient de data
+    char client_hostname[INET_ADDRSTRLEN];
+    if (inet_ntop(AF_INET, &serv_addr.sin_addr, client_hostname, INET_ADDRSTRLEN) == NULL)
+    {
+        std::cerr << "Error: inet_ntop() failed." << std::endl;
+        return -1;
+    }
+    newClient.client_ip = client_hostname;
+    std::cout << "newClient.client_ip = " << newClient.client_ip << std::endl;
     data->client.push_back(newClient);
     data->max_client++;
-    //get_client_ip(newClient);
     return (0);
 }

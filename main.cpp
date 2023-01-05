@@ -40,6 +40,7 @@ int main(int ac, char **av)
     
     
     data.max_client = 0;
+    get_host_name(&data);
     ft_bzero(data.input, ft_strlen(data.input));
     ft_bzero(data.output, ft_strlen(data.output));
     //clear/init fdset
@@ -100,18 +101,18 @@ int main(int ac, char **av)
                 std::cerr << "ERROR accept" << std::endl;
                 return (1);
             }
-            create_new_client(newSockfd, &data);
+            create_new_client(newSockfd, &data, serv_addr);
             //printf("New connection , socket fd is %d , ip is : %s , port : %d \n" , newSockfd , 
             //inet_ntoa(serv_addr.sin_addr) , ntohs(serv_addr.sin_port));
-            if( send(newSockfd, ":c1r4s2 001 jschreye :Welcome to the IRC Network, jschreye\r\n", 80, 0) != 80)
-                std::cerr << "ERROR send" << std::endl;
+            //if( send(newSockfd, ":c1r4s2 001 jschreye :Welcome to the IRC Network, jschreye\r\n", 80, 0) != 80)
+                //std::cerr << "ERROR send" << std::endl;
         }
         for (int i = 0; i < data.max_client; i++)
         {
             sd = data.client[i].sd;
             if (FD_ISSET(sd, &readfds))
             {
-                /*
+                
                 if ((n = read (sd, data.input, 255)) == 0)
                 {
                     std::cout << "Host disconected " << std::endl;
@@ -121,16 +122,16 @@ int main(int ac, char **av)
                     close(sd);
                 }
                 else
-                {*/
+                {
                     //envoyer le message au parser a analyser
-                    n = read (sd, data.input, 255);
+                    //n = read (sd, data.input, 255);
                     ft_bzero(data.output, ft_strlen(data.output));
                     data.input[n] = '\0';
                     first_parsing(&data, i);
                     //printf("This is the message from %d: %s\n", sd, data.input);
                     //send(sd , data.output, strlen(data.output) , 0);
                     //send_all_user(&data, i);
-                //}
+                }
             }
         }
     }

@@ -2,7 +2,7 @@
 
 void user(t_data *data, int i, std::string cmd)
 {
-    std::string msg;
+    
     size_t pos = cmd.find_first_of(':', 0);
     cmd.erase(0, pos + 1);
     std::cout << "cmd de user = " << cmd << std::endl;
@@ -19,4 +19,11 @@ void user(t_data *data, int i, std::string cmd)
         return;
     }
     data->client[i].username = cmd;
+    std::string msg = ":";
+    msg += data->server_name;
+    msg += " 001 ";
+    msg += data->client[i].nickname;
+    msg += ": Welcome to the IRC Network";
+    create_output(data, msg);
+    send_one_user(data, i);
 }

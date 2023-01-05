@@ -25,7 +25,7 @@ class client
     std::string nickname;
     std::string username;
     std::string password;
-    //std::string client_ip;
+    std::string client_ip;
     bool        op;
     std::string chanel;
     

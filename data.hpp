@@ -37,6 +37,7 @@
 typedef struct s_data
 {
     std::string pwd_server;
+    std::string server_name;
     std::vector<client> client; // le tableau des clients
     //std::map<std::string, std::vector<int> > chanels; // les objets 
     int     max_client;
@@ -48,7 +49,7 @@ typedef struct s_data
 
 typedef void(*funtab) (t_data *data, int i, std::string cmd);
 
-int create_new_client(int socketfd, t_data *data);
+int create_new_client(int socketfd, t_data *data, sockaddr_in serv_addr);
 int first_parsing(t_data *data, int i);
 
 void    nick (t_data *data, int i, std::string cmd);
@@ -71,4 +72,6 @@ void list(t_data *data, int i, std::string cmd);
 int	ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
 void kick(t_data *data, int i, std::string cmd);
+void cap(t_data *data, int i, std::string cmd);
+void get_host_name(t_data *data);
 #endif
