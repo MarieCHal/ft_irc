@@ -20,8 +20,8 @@ int print_client(t_data *data)
 }
 
 /** TODO:
- * atoi
- * strlen
+ * atoi fait
+ * strlen fait
  *  */
 
 int main(int ac, char **av)
@@ -41,8 +41,8 @@ int main(int ac, char **av)
     int activity;
     
     data.server_name = "c1r2s1";
-    ft_bzero(data.input, strlen(data.input));
-    ft_bzero(data.output, strlen(data.output));
+    ft_bzero(data.input, ft_strlen(data.input));
+    ft_bzero(data.output, ft_strlen(data.output));
     //clear/init fdset
     FD_ZERO(&readfds);
     if(ac < 2)
@@ -56,7 +56,7 @@ int main(int ac, char **av)
             &reuseaddr_on, sizeof( reuseaddr_on)) < 0)
         std::cout << "ERROR sockopt" << std::endl;
     ft_bzero((char *) &serv_addr, sizeof(serv_addr));
-    portNo = atoi(av[1]);
+    portNo = ft_atoi(av[1]);
     serv_addr.sin_family = AF_INET;//si communication iternet utlise cette variable sinon AF_UNIX en local
     serv_addr.sin_port = htons(portNo);//converti le port number en network byte order
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);//contient l'IP de l'hote
@@ -114,7 +114,7 @@ int main(int ac, char **av)
                 {*/
                     //envoyer le message au parser a analyser
                     n = read (sd, data.input, 255);
-                    ft_bzero(data.output, strlen(data.output));
+                    ft_bzero(data.output, ft_strlen(data.output));
                     data.input[n] = '\0';
                     first_parsing(&data, i);
                     //printf("This is the message from %d: %s\n", sd, data.input);
@@ -123,6 +123,7 @@ int main(int ac, char **av)
                 //}
             }
         }
+        //ATTENTION FAUT DELETE LE TABLEAU DE CLIENT VU QU'ON UTILSE NEW
     }
     return (0);
 }

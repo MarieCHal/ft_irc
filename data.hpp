@@ -68,4 +68,6 @@ char *  ft_strcpy(char *dest, const char * src);
 void    privmsg(t_data *data, int i, std::string cmd);
 void    quit(t_data *data, int i, std::string cmd);
 void list(t_data *data, int i, std::string cmd);
+int	ft_atoi(const char *str);
+size_t	ft_strlen(const char *str);
 #endif

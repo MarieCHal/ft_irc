@@ -10,7 +10,7 @@ void send_all_user(t_data *data, int i)
     {
         if (data->client[k].chanel.compare(data->client[i].chanel) == 0)
         {
-            send(data->client[k].sd, data->output, strlen(data->output), 0);
+            send(data->client[k].sd, data->output, ft_strlen(data->output), 0);
         }
         k++;
     } 
@@ -18,5 +18,5 @@ void send_all_user(t_data *data, int i)
 
 void send_one_user(t_data *data, int i)
 {
-    send(data->client[i].sd, data->output, strlen(data->output), 0);
+    send(data->client[i].sd, data->output, ft_strlen(data->output), 0);
 }
