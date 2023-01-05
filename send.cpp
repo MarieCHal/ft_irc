@@ -8,7 +8,7 @@ void send_all_user(t_data *data, int i)
 
     while (k < data->max_client)
     {
-        if (data->client[k].chanel.compare(data->client[i].chanel) == 0)
+        if (data->client[k].chanel.compare(data->client[i].chanel) == 0 && k != i)
         {
             send(data->client[k].sd, data->output, ft_strlen(data->output), 0);
         }

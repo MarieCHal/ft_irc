@@ -20,7 +20,6 @@
 //revoie dans le output de tout les client du canal le input du client expediteur
 void    message (t_data *data, int i, std::string cmd, std::string key_word) {
 
-    (void)cmd;
     if (data->client[i].chanel.length() == 0)
     {
         //std::cout << "key_word in message = " << key_word << std::endl;
@@ -33,10 +32,6 @@ void    message (t_data *data, int i, std::string cmd, std::string key_word) {
         create_output(data, msg);
         send_one_user(data, i);
         return;
-    }
-    else
-    {
-
     }
     // si output
     //parse msg

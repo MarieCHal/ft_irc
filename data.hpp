@@ -36,7 +36,7 @@
 
 typedef struct s_data
 {
-    std::string server_name;
+    std::string pwd_server;
     std::vector<client> client; // le tableau des clients
     //std::map<std::string, std::vector<int> > chanels; // les objets 
     int     max_client;
@@ -70,4 +70,5 @@ void    quit(t_data *data, int i, std::string cmd);
 void list(t_data *data, int i, std::string cmd);
 int	ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
+void kick(t_data *data, int i, std::string cmd);
 #endif

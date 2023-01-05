@@ -26,29 +26,39 @@ int print_client(t_data *data)
 
 int main(int ac, char **av)
 {
+    struct sockaddr_in serv_addr;//est une structure contenant une adresse internet. Cette structure est définie dans netinet/in.h.
+    t_data data;
+    fd_set readfds;
     int portNo;//port serveur (2000)//
     int addrlen;
     int n;//retour read() write()
-    struct sockaddr_in serv_addr;//est une structure contenant une adresse internet. Cette structure est définie dans netinet/in.h.
-
-    t_data data;
-    data.max_client = 0;
-    fd_set readfds;
     int sockfd;//retour socket() server
     int newSockfd;//retour socket() client
     int max_sd;
     int sd;
     int activity;
     
-    data.server_name = "c1r2s1";
+    
+    data.max_client = 0;
     ft_bzero(data.input, ft_strlen(data.input));
     ft_bzero(data.output, ft_strlen(data.output));
     //clear/init fdset
     FD_ZERO(&readfds);
-    if(ac < 2)
+    if(ac < 2 || ac > 3)
     {
-        std::cerr << "ERR0R, no port" << std::endl;
+        std::cerr << "ERR0R, invalid argument" << std::endl;
         return(1);
+    }
+    portNo = ft_atoi(av[1]);
+    if (portNo != 6667)
+    {
+        std::cerr << "ERR0R, invalid port, please use port 6667" << std::endl;
+        return(1);
+    }
+    if(ac == 3)
+    {
+        data.pwd_server = av[2];
+        std::cout << data.pwd_server << std::endl; 
     }
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     int reuseaddr_on = 1;
@@ -56,7 +66,7 @@ int main(int ac, char **av)
             &reuseaddr_on, sizeof( reuseaddr_on)) < 0)
         std::cout << "ERROR sockopt" << std::endl;
     ft_bzero((char *) &serv_addr, sizeof(serv_addr));
-    portNo = ft_atoi(av[1]);
+
     serv_addr.sin_family = AF_INET;//si communication iternet utlise cette variable sinon AF_UNIX en local
     serv_addr.sin_port = htons(portNo);//converti le port number en network byte order
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);//contient l'IP de l'hote
@@ -123,7 +133,6 @@ int main(int ac, char **av)
                 //}
             }
         }
-        //ATTENTION FAUT DELETE LE TABLEAU DE CLIENT VU QU'ON UTILSE NEW
     }
     return (0);
 }
