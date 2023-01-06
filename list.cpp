@@ -2,9 +2,10 @@
 
 void list(t_data *data, int i, std::string cmd)
 {
-    std::string reponse;
+    std::string msg = data->client[i].nickname;
     (void)cmd;
-
+    compose_reply(data, " 321 "," LIST ", " Channel :Users Name");
+    send_one_user(data, i);
     for(int j = 0; j < data->max_client; j++)
     {
         if (data->client[i].chanel.empty())
@@ -13,14 +14,11 @@ void list(t_data *data, int i, std::string cmd)
             j++;
         else
         {
-            reponse += ":c1r4s2 322 ";
-            reponse += data->client[i].nickname;
-            reponse += ' ';
-            reponse += data->client[j].chanel;
-            reponse += "\n";
+            msg += " ";
+            compose_reply(data, " 322 "," LIST ", data->client[j].chanel);
+            send_one_user(data, i);
         }   
     }
-    reponse += ":End of /LIST";
-    create_output(data, reponse);
+    compose_reply(data, " 323 ", " LIST ", " :End of /LIST");
     send_one_user(data, i);
 }

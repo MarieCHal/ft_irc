@@ -61,6 +61,7 @@ std::string toUpper(std::string s);
 
 
 //gael
+
 void    create_output(t_data *data, std::string msg);
 void    message (t_data *data, int i, std::string cmd, std::string key_word);
 void    send_all_user(t_data *data, int i);
@@ -74,4 +75,13 @@ size_t	ft_strlen(const char *str);
 void kick(t_data *data, int i, std::string cmd);
 void cap(t_data *data, int i, std::string cmd);
 void get_host_name(t_data *data);
+void ping(t_data *data, int i, std::string cmd);
+void ison(t_data *data, int i, std::string cmd);
+void message_compose(int num_args, ...);
+
+//rpl/err/mess
+void compose_reply(t_data *data, std::string err_no, std::string param, std::string mess);
+void compose_message(t_data *data, std::string keyword, std::string param1, std::string param2);
+void compose_private_message(t_data *data, std::string param1, std::string param2, std::string mess);
+
 #endif

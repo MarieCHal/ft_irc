@@ -1,12 +1,11 @@
 #include "data.hpp"
 
 void user(t_data *data, int i, std::string cmd)
-{
-    
-    size_t pos = cmd.find_first_of(':', 0);
-    cmd.erase(0, pos + 1);
-    std::cout << "cmd de user = " << cmd << std::endl;
+{  
     int k = 0;
+    size_t pos = cmd.find_first_of(':', 0);
+    
+    cmd.erase(0, pos + 1);
     for (size_t j = 0; j < cmd.length(); j++)
     {
         if (cmd[j] == ' ')
@@ -19,11 +18,8 @@ void user(t_data *data, int i, std::string cmd)
         return;
     }
     data->client[i].username = cmd;
-    std::string msg = ":";
-    msg += data->server_name;
-    msg += " 001 ";
-    msg += data->client[i].nickname;
-    msg += ": Welcome to the IRC Network";
-    create_output(data, msg);
+    //compose_reply(data, " 001 ", data->client[i].nickname, ": Welcome to the IRC Network");
+    message_compose(5, data, data->server_name.c_str(), " 001 ",
+                    data->client[i].nickname.c_str(), ": Welcome to the IRC Network");
     send_one_user(data, i);
 }

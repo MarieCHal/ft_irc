@@ -12,23 +12,29 @@
 
 void join(t_data *data, int i, std::string cmd)
 {
-    std::string msg;
     size_t pos = cmd.find_first_of(32, 0);
+
     cmd.erase(0, pos + 1);
-    //if there is any of those characters the channel name is invalid
-    std::cout << "cmd in join = " << cmd << std::endl;
-    if (cmd.find(' ') && cmd.find(',') && cmd.find(7) && cmd[0] != '#')
+    if (cmd.find(' ') != std::string::npos)
     {
-        create_output(data, "Invalid Channel name.");
+        compose_reply(data, " 403 ", data->client[i].chanel, ": Invalid caracter");
+        send_one_user(data, i);
+        return;
+    }
+    if (cmd.find(',') != std::string::npos)
+    {
+        compose_reply(data, " 403 ", data->client[i].chanel, ": Invalid caracter");
+        send_one_user(data, i);
+        return;
+    }
+    if (cmd.find(7) != std::string::npos)
+    {
+        compose_reply(data, " 403 ", data->client[i].chanel, ": Invalid caracter");
         send_one_user(data, i);
         return;
     }
     data->client[i].chanel = cmd;
-    msg += "PRIVMSG ";
-    msg += data->client[i].chanel;
-    msg += " :";
-    msg += "42 ";
-    create_output(data, msg);
+    compose_message(data, " JOIN ", data->client[i].nickname, data->client[i].chanel);
     send_all_user(data, i);
     for (int j = 0; j < data->max_client; j++)
     {
@@ -39,5 +45,6 @@ void join(t_data *data, int i, std::string cmd)
         }
     }
     data->client[i].op = true;
-    //std::cout << data->client[i].nickname << " est-il op? " << data->client[i].op << std::endl;
+    compose_reply(data, " 331 ", data->client[i].chanel, ": No topic is set");
+    send_one_user(data, i);
 }

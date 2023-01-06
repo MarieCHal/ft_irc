@@ -14,7 +14,6 @@ SRCS =	main.cpp \
 		parse.cpp \
 		data.cpp \
 		fonction_utils.cpp \
-		message.cpp \
 		nick.cpp \
 		user.cpp \
 		join.cpp \
@@ -23,7 +22,10 @@ SRCS =	main.cpp \
 		list.cpp \
 		quit.cpp \
 		kick.cpp \
-		cap.cpp
+		cap.cpp \
+		compose_msg.cpp \
+		ison.cpp \
+		ping.cpp
 			
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
