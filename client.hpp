@@ -25,8 +25,13 @@ class client
     std::string nickname;
     std::string username;
     std::string password;
+    std::string client_ip;
     bool        op;
+    bool        pass;
     std::string chanel;
+    char buffer[512];
+    std::string cmd;
+    int         pos;
     
     client () {}
     client(int socketfd) : sd(socketfd) {}
