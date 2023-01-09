@@ -2,24 +2,20 @@
 
 void check_cmd(t_data *data, int i, std::string key_word, std::string cmd)
 {
-    //std::cout << "key_word de check_cmd = " << key_word << std::endl;
-    std::string possible_cmd [] = {"NICK", "USER", "JOIN", "LIST", "QUIT"};
-    funtab function[] = {&nick, &user, &join, &list, &quit};
+    std::string possible_cmd [] = {"NICK", "USER", "JOIN", "PRIVMSG", "LIST", "QUIT", "KICK", "CAP", "ISON", "PING", "PASS", "NOTICE"};
+    funtab function[] = {&nick, &user, &join, &privmsg, &list, &quit, &kick, &cap, &ison, &ping, &pass, &notice};
     size_t j = 0;
-    //std::cout << "cmd de check_cmd = " << cmd << std::endl;
-    std::cout << "cmd-length de check_cmd = " << possible_cmd->length() << std::endl;
-    //std::cout << "keyword-length de check_cmd = " << key_word.length() << std::endl;
-    //std::cout << "key_word in check_cmd = " << key_word << std::endl;
-    while (j < 5)
+    while (j < 12)
     {
         if (key_word.compare(possible_cmd[j]) == 0)
         {
             ((*function[j])(data, i, cmd));
             return;
         }
-        //std::cout << "possible_cmd[j] = " << possible_cmd[j] << std::endl;
         j++;
     }
-    //std::cout << "cmd-length de check_cmd = " << possible_cmd->length() << std::endl;
-    message(data, i, cmd, key_word);
+    message_compose(5, data, data->server_name.c_str(), " 421 * ", key_word.c_str(), " :Unknown command");
+    send_one_user(data, i);
+    return;
 }
+

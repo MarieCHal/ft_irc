@@ -1,30 +1,41 @@
-/** @brief parse la commande join
- * 
- * appelé par parse.cpp si c'est detecté
- * 
- * si la commande est valide:
- * appel la exec/join.cpp pour executer la commande
- * et envoie tous les arguments necessaires
- * 
- * */
-
 #include "data.hpp"
 
+// a voir pourquoi on ne voit plus quand on ce connect au channel
 void join(t_data *data, int i, std::string cmd)
 {
     size_t pos = cmd.find_first_of(32, 0);
+
     cmd.erase(0, pos + 1);
-    //if there is any of those characters the channel name is invalid
-    std::cout << "cmd in join = " << cmd << std::endl;
-    if (cmd.find(' ') && cmd.find(',') && cmd.find(7) && cmd[0] != '#')
+    if (cmd.find(' ') != std::string::npos)
     {
-        std::cout << "Invalid Channel name: " << cmd << std::endl;
+        message_compose(5, data, data->server_name.c_str(), " 403 ", data->client[i].chanel.c_str(), ": Invalid caracter");
+        send_one_user(data, i);
         return;
     }
-    else
+    if (cmd.find(',') != std::string::npos)
     {
-        data->client[i].chanel = cmd;
+        message_compose(5, data, data->server_name.c_str(), " 403 ", data->client[i].chanel.c_str(), ": Invalid caracter");
+        send_one_user(data, i);
+        return;
     }
-    create_output(data, "You joined");
-    
+    if (cmd.find(7) != std::string::npos)
+    {
+        message_compose(5, data, data->server_name.c_str(), " 403 ", data->client[i].chanel.c_str(), ": Invalid caracter");
+        send_one_user(data, i);
+        return;
+    }
+    data->client[i].chanel = cmd;
+    message_compose(4, data, " JOIN ", data->client[i].nickname.c_str(), data->client[i].chanel.c_str());
+    send_all_user(data, i);
+    for (int j = 0; j < data->max_client; j++)
+    {
+        if (cmd.compare(data->client[j].chanel) == 0 && j != i)
+        {
+            data->client[i].op = false;
+            return ;
+        }
+    }
+    data->client[i].op = true;
+    message_compose(5, data, data->server_name.c_str(), " 331 ", data->client[i].chanel.c_str(), ": No topic is set");
+    send_one_user(data, i);
 }
