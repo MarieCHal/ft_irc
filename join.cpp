@@ -25,7 +25,8 @@ void join(t_data *data, int i, std::string cmd)
         return;
     }
     data->client[i].chanel = cmd;
-    message_compose(4, data, " JOIN ", data->client[i].nickname.c_str(), data->client[i].chanel.c_str());
+    message_compose(4, data, data->client[i].nickname.c_str(), " JOIN ", data->client[i].chanel.c_str());
+    std::cout << "join -=" << data->output << std::endl;
     send_all_user(data, i);
     for (int j = 0; j < data->max_client; j++)
     {

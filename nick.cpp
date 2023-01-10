@@ -22,7 +22,7 @@ void nick(t_data *data, int i, std::string cmd)
         send_one_user(data, i);
         return;
     }
-    message_compose(4, data, " NICK ", data->client[i].nickname.c_str(), cmd.c_str());
+    message_compose(5, data, " NICK ", data->client[i].nickname.c_str(), " ", cmd.c_str());
     send_one_user(data, i);
     data->client[i].nickname = cmd;
 }

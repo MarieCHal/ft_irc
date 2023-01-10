@@ -13,6 +13,7 @@ void notice(t_data *data, int i, std::string cmd)
         chan.assign(cmd, 0, pos);
         cmd.erase(0, pos + 2);
         message_compose(6, data, data->client[i].nickname.c_str(), " PRIVMSG ", data->client[i].chanel.c_str(), " :", cmd.c_str());
+        send_all_user(data, i);
         return ;
     }
     else
@@ -25,7 +26,7 @@ void notice(t_data *data, int i, std::string cmd)
             {
                 if (data->client[j].chanel.compare(data->client[i].chanel) == 0)
                 {
-                    message_compose(6, data, data->client[i].nickname.c_str(), " PRIVMSG ",  " PRIVMSG ", " :", cmd.c_str());
+                    message_compose(6, data, data->client[i].nickname.c_str(), " PRIVMSG ", " PRIVMSG ", " :", cmd.c_str());
                     send_one_user(data, j);
                     return ;
                 }

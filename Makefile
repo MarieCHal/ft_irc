@@ -1,4 +1,4 @@
-NAME = irc_server
+NAME = ircserv
 
 CC = c++
 
@@ -28,7 +28,7 @@ SRCS =	main.cpp \
 		ping.cpp \
 		pass.cpp \
 		buffer_check.cpp \
-		notice.cpp
+		notice.cpp 
 			
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 

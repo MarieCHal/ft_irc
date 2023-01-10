@@ -1,3 +1,4 @@
+class data;
 #ifndef DATA_HPP
 #define DATA_HPP
 

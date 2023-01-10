@@ -35,11 +35,12 @@ int main(int ac, char **av)
         data.pwd_server = av[2];
         std::cout << data.pwd_server << std::endl;
     }
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+        std::cerr << "ERROR sockfd" << std::endl;
     int reuseaddr_on = 1;
-    if( setsockopt( sockfd, SOL_SOCKET, SO_REUSEADDR,
+    if(setsockopt( sockfd, SOL_SOCKET, SO_REUSEADDR,
             &reuseaddr_on, sizeof( reuseaddr_on)) < 0)
-        std::cout << "ERROR sockopt" << std::endl;
+        std::cerr << "ERROR sockopt" << std::endl;
     ft_bzero((char *) &serv_addr, sizeof(serv_addr));
 
     serv_addr.sin_family = AF_INET;//si communication iternet utlise cette variable sinon AF_UNIX en local
@@ -49,7 +50,8 @@ int main(int ac, char **av)
     if(bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
         std::cerr << "ERROR on binding" << std::endl;
     //ecoute la socket du serveur et definie le nb de connection en attente
-    listen(sockfd, 5);
+    if(listen(sockfd, 5) < 0)
+         std::cerr << "ERROR listen" << std::endl;
     addrlen = sizeof(serv_addr);
     while (1)
     {
@@ -82,19 +84,13 @@ int main(int ac, char **av)
             sd = data.client[i].sd;
             if (FD_ISSET(sd, &readfds))
             {
-                if ((n = read (sd, data.client[i].buffer, 255)) == 0)
-                {
-                    data.client.erase(data.client.begin() + i);
-                    data.max_client--;
-                    close(sd);
-                }
-                else
-                {
-                    ft_bzero(data.output, ft_strlen(data.output));
-                    data.client[i].buffer[n] ='\0';
-                    if (buffer_check(&data, i) == 0)
-                        first_parsing(&data, i);
-                }
+                n = read (sd, data.client[i].buffer, 255);
+                if (n < 0)
+                    std::cerr << "ERROR reading on socket" << std::endl;
+                ft_bzero(data.output, ft_strlen(data.output));
+                data.client[i].buffer[n] ='\0';
+                if (buffer_check(&data, i) == 0)
+                    first_parsing(&data, i);
             }
         }
     }

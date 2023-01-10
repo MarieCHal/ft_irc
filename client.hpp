@@ -23,7 +23,30 @@ class client
         int         pos;
     
         client () {}
-        client(int socketfd) : sd(socketfd) {}
+        client(int socketfd) : sd(socketfd)
+        {
+            op = false;
+            pass = false;
+            pos = 0; 
+        }
+        client(const client &rhs) {*this = rhs;}
+        client &operator= (const client &rhs)
+        {
+            if (&rhs != this)
+            {
+                nickname = rhs.nickname;
+                username = rhs.username;
+                password = rhs.password;
+                client_ip = rhs.client_ip;
+                cmd = rhs.cmd;
+                chanel = rhs.chanel;
+                op = rhs.op;
+                pass = rhs.pass;
+                sd = rhs.sd;
+                pos = rhs.pos;   
+            }
+            return *this;
+        }
         ~client() {}
 };
 
